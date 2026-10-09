@@ -1,0 +1,151 @@
+﻿Using network 'ganache'.
+
+
+Compiling your contracts...
+===========================
+> Compiling .\contracts\ERC5289.sol
+> Compiling .\contracts\ERC5289.sol
+> Compiling .\contracts\IERC5289Library.sol
+> Compiling .\contracts\IERC5289Library.sol
+> Compiling .\contracts\SportExchange.sol
+> Compiling .\contracts\SportExchange.sol
+> Compiling .\contracts\SportExchangeInterface.sol
+> Compiling .\contracts\SportExchangeInterface.sol
+> Compiling .\contracts\Sportract.sol
+> Compiling .\contracts\Sportract.sol
+> Compiling .\contracts\SportractInterface.sol
+> Compiling .\contracts\SportractInterface.sol
+> Compiling .\contracts\mocks\EtherRejecter.sol
+> Compiling .\contracts\mocks\ForceSend.sol
+> Compiling .\contracts\mocks\ForceSend.sol
+> Compiling .\contracts\mocks\ReentrancyProbe.sol
+> Compiling .\contracts\mocks\ReentrancyProbe.sol
+> Compilation warnings encountered:
+
+    Warning: "selfdestruct" has been deprecated. The underlying opcode will eventually undergo breaking changes, and its use is not recommended.
+  --> project:/contracts/mocks/ForceSend.sol:14:9:
+   |
+14 |         selfdestruct(target);
+   |         ^^^^^^^^^^^^
+
+
+> Artifacts written to C:\Users\Bru-9\AppData\Local\Temp\test--1740-9wYaHbVh8VC7
+> Compiled successfully using:
+   - solc: 0.8.18+commit.87f61d96.Emscripten.clang
+
+
+  Contract: Sportract - token and value rule
+    initial state
+      Ô£ö assigns the initial supply to the owner (45ms)
+      Ô£ö uses the default parameters (6, 4, 500 tokens)
+    registration of the results
+      Ô£ö score above the upper bound: burns 10% of the owner's balance (123ms)
+      Ô£ö burning never brings the owner's balance below the share q (520 -> 500) (192ms)
+      Ô£ö with a balance at or below q nothing is burned (437ms)
+      Ô£ö score below the lower bound: mints 500 tokens (173ms)
+      Ô£ö scores between the bounds, bounds included: supply unchanged (361ms)
+      Ô£ö rejects scores outside [1, 10] (105ms)
+      Ô£ö rejects registrations from accounts other than the owner
+    value rule parameters
+      Ô£ö only the owner can change them
+      Ô£ö rejects invalid bounds and a zero share (94ms)
+      Ô£ö applies the new parameters (share in whole tokens) (241ms)
+    athlete profile
+      Ô£ö setUserData is restricted to the owner (141ms)
+    link to the exchange
+      Ô£ö is set only once, only by the owner and with a non-zero address (104ms)
+    gas costs (informative)
+        gas deploy Sportract:   3180681
+        gas registerNewContest: 184363
+      Ô£ö reports the gas of deployment and registration (142ms)
+
+  Contract: Sportract - ERC-5289 notarization
+    Ô£ö every registration signs the document and emits DocumentSigned (94ms)
+    Ô£ö documentSigned, documentSignedAt and legalDocument return the signature data (126ms)
+    Ô£ö a document never signed is not signed by anyone, not even address(0) (57ms)
+    Ô£ö a signed document cannot be overwritten (117ms)
+    Ô£ö nobody can sign on behalf of another address (62ms)
+    Ô£ö declares the ERC-5289 and ERC-165 interfaces (supportsInterface)
+
+  Contract: Sportract - defects D1-D3 (regression)
+    Ô£ö D1: a third party cannot change the profile data (111ms)
+    Ô£ö D2: a good result is registered even if the balance to burn from is insufficient (144ms)
+    Ô£ö D3: a third party cannot take a documentId and block the registration (122ms)
+
+  Contract: SportExchange - liquidity and joint deposit
+    link with Sportract
+      Ô£ö the exchange knows the token and recognizes the athlete as the owner of Sportract (87ms)
+      Ô£ö if the owner of Sportract changes, the athlete recognized by the exchange changes too (67ms)
+    addLiquidity (Uniswap V1 scheme)
+      Ô£ö the first deposit sets the price and mints shares equal to the ether deposited (665ms)
+      Ô£ö a later provider deposits at the current ratio and receives proportional shares (3.3) (1403ms)
+      Ô£ö rejects a deposit above max_tokens or after the deadline (596ms)
+    removeLiquidity
+      Ô£ö returns both reserves in proportion (587ms)
+      Ô£ö rejects withdrawing shares not owned or below the given minimums (108ms)
+    offerSponsorship
+      Ô£ö is restricted to the athlete and requires a valid sponsor (75ms)
+      Ô£ö registers the offer for a sponsor and revokes it with maxTokens = 0 (164ms)
+    sponsorLiquidity (joint deposit)
+      Ô£ö first deposit: the offer sets the price and the shares are split in half (997ms)
+      Ô£ö later deposit: follows the current ratio and leaves the price unchanged (2080ms)
+      Ô£ö the odd unit of the shares, if any, goes to the sponsor (871ms)
+      Ô£ö is rejected without an offer, above the offer, or with insufficient allowance or balance (1459ms)
+      Ô£ö if the deposit is rejected the ether stays with the sponsor and the pool does not change (135ms)
+      Ô£ö enforces the minimum shares and the deadline set by the sponsor (1178ms)
+      Ô£ö athlete and sponsor withdraw their shares with removeLiquidity (2401ms)
+
+  Contract: SportExchange - prices and trades
+    pricing functions
+      Ô£ö the getters apply formula (3.2) and the fixed-output formula (69ms)
+      Ô£ö example of section 3.2: 1 ETH buys 45.33 tokens against 50 at the marginal price
+    ETH to SPRT
+      Ô£ö ethToTokenSwapInput: fixed input, k does not decrease (539ms)
+      Ô£ö ethToTokenTransferInput: tokens go to the given recipient (414ms)
+      Ô£ö ethToTokenSwapOutput: exact amount of tokens, the excess ether is refunded to the buyer (513ms)
+      Ô£ö sending ether directly to the pool is equivalent to ethToTokenSwapInput (87ms)
+    SPRT to ETH
+      Ô£ö tokenToEthTransferInput: fixed amount of tokens, ether to the recipient (688ms)
+      Ô£ö tokenToEthTransferOutput: exact ether to the recipient, tokens taken according to the formula (683ms)
+      Ô£ö tokenToEthSwapInput and tokenToEthSwapOutput pay the ether to the seller (1084ms)
+    price limits and deadline
+      Ô£ö rejects trades violating minimum, maximum or deadline (204ms)
+      Ô£ö k grows along a sequence of trades in both directions (3178ms)
+
+  Contract: Sportract + SportExchange - integration and security
+    value rule and pool (4.3)
+      Ô£ö a high performance reduces the athlete's balance and the supply, not the reserves or the price of the pool (1059ms)
+      Ô£ö a low performance mints q tokens to the athlete without touching the pool (1023ms)
+      Ô£ö offered tokens remain subject to the value rule (290ms)
+    reentrancy (6.3)
+      Ô£ö a recipient trying to re-enter while receiving ether is blocked (1653ms)
+    forced ether transfers (6.7)
+      Ô£ö ether forced before the first deposit: initial shares depend only on the ether sent (1274ms)
+      Ô£ö ether forced into an active pool: raises the price and is shared among the providers (1359ms)
+    checked arithmetic (6.4)
+      Ô£ö rejects outputs equal to or above the reserve and withdrawals above the shares owned (1009ms)
+    gas costs (informative)
+        deploy SportExchange            4308575
+        approve                         46956
+        offerSponsorship                51926
+        sponsorLiquidity (first)        148762
+        sponsorLiquidity (later)        88039
+        ethToTokenSwapInput             63742
+        tokenToEthSwapInput             61914
+        removeLiquidity                 83692
+        registerNewContest (burn)       184363
+      Ô£ö reports the gas of the main operations (4095ms)
+
+  Contract: SportExchange - denial of service and reentrancy
+    denial of service (6.5)
+      Ô£ö a recipient that rejects ether makes only its own sale revert (825ms)
+      Ô£ö a liquidity provider that rejects ether cannot withdraw, but cannot block the others (2601ms)
+        sponsorLiquidity gas, sponsors 2-7: 105139, 105139, 105139, 105139, 105139, 105139
+      Ô£ö the gas of a joint deposit does not grow with the number of sponsors (no unbounded loops) (7991ms)
+    reentrancy (6.3)
+      Ô£ö a seller re-entering while receiving the payment is stopped by the guard (1360ms)
+      Ô£ö a buyer re-entering while receiving the refund is stopped by the guard (1240ms)
+
+
+  64 passing (2m)
+

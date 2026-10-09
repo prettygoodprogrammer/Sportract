@@ -1,0 +1,751 @@
+{
+  "contractName": "IERC5289Library",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "signer",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint16",
+          "name": "documentId",
+          "type": "uint16"
+        }
+      ],
+      "name": "DocumentSigned",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint16",
+          "name": "documentId",
+          "type": "uint16"
+        }
+      ],
+      "name": "legalDocument",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint16",
+          "name": "documentId",
+          "type": "uint16"
+        }
+      ],
+      "name": "documentSigned",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "signed",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint16",
+          "name": "documentId",
+          "type": "uint16"
+        }
+      ],
+      "name": "documentSignedAt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint16",
+          "name": "documentId",
+          "type": "uint16"
+        }
+      ],
+      "name": "signDocument",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"documentId\",\"type\":\"uint16\"}],\"name\":\"DocumentSigned\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint16\",\"name\":\"documentId\",\"type\":\"uint16\"}],\"name\":\"documentSigned\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"signed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint16\",\"name\":\"documentId\",\"type\":\"uint16\"}],\"name\":\"documentSignedAt\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"documentId\",\"type\":\"uint16\"}],\"name\":\"legalDocument\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"internalType\":\"uint16\",\"name\":\"documentId\",\"type\":\"uint16\"}],\"name\":\"signDocument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"documentSignedAt(address,uint16)\":{\"details\":\"If the user has not signed the document, the timestamp may be anything.\"},\"signDocument(address,uint16)\":{\"details\":\"This MUST be validated by the smart contract. This MUST emit DocumentSigned or throw.\"},\"supportsInterface(bytes4)\":{\"details\":\"Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas.\"}},\"version\":1},\"userdoc\":{\"events\":{\"DocumentSigned(address,uint16)\":{\"notice\":\"Emitted when signDocument is called\"}},\"kind\":\"user\",\"methods\":{\"documentSigned(address,uint16)\":{\"notice\":\"Returns whether or not the given user signed the document.\"},\"documentSignedAt(address,uint16)\":{\"notice\":\"Returns when the the given user signed the document.\"},\"legalDocument(uint16)\":{\"notice\":\"An immutable link to the legal document (RECOMMENDED to be hosted on IPFS). This MUST use a common file format, such as PDF, HTML, TeX, or Markdown.\"},\"signDocument(address,uint16)\":{\"notice\":\"Sign a document\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IERC5289Library.sol\":\"IERC5289Library\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f\",\"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy\"]},\"project:/contracts/IERC5289Library.sol\":{\"keccak256\":\"0xca300b32f4584dd1cc354b8adf0050eaa986ee771bdeaa1cfb0f1df7737cf780\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6d904f631735cabc7c9cf0b975f378fb596a5592bedbe7dabb3762773e245581\",\"dweb:/ipfs/QmdZ64SPKzaUFCRTe6ovByzQGkGXnazVf7Kvn5hJUHCe3m\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"@openzeppelin/contracts/utils/introspection/IERC165.sol\";\r\n\r\ninterface IERC5289Library is IERC165 {\r\n    /// @notice Emitted when signDocument is called\r\n    event DocumentSigned(address indexed signer, uint16 indexed documentId);\r\n    \r\n    /// @notice An immutable link to the legal document (RECOMMENDED to be hosted on IPFS). This MUST use a common file format, such as PDF, HTML, TeX, or Markdown.\r\n    function legalDocument(uint16 documentId) external view returns (string memory);\r\n    \r\n    /// @notice Returns whether or not the given user signed the document.\r\n    function documentSigned(address user, uint16 documentId) external view returns (bool signed);\r\n\r\n    /// @notice Returns when the the given user signed the document.\r\n    /// @dev If the user has not signed the document, the timestamp may be anything.\r\n    function documentSignedAt(address user, uint16 documentId) external view returns (uint timestamp);\r\n\r\n    /// @notice Sign a document\r\n    /// @dev This MUST be validated by the smart contract. This MUST emit DocumentSigned or throw.\r\n    function signDocument(address signer, uint16 documentId) external;\r\n}\r\n",
+  "sourcePath": "C:\\Users\\Bru-9\\Coding\\GitHub\\Sportract\\contracts\\IERC5289Library.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IERC5289Library.sol",
+    "exportedSymbols": {
+      "IERC165": [
+        904
+      ],
+      "IERC5289Library": [
+        1146
+      ]
+    },
+    "id": 1147,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1099,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:9"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "file": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "id": 1100,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 1147,
+        "sourceUnit": 905,
+        "src": "60:65:9",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 1101,
+              "name": "IERC165",
+              "nameLocations": [
+                "158:7:9"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 904,
+              "src": "158:7:9"
+            },
+            "id": 1102,
+            "nodeType": "InheritanceSpecifier",
+            "src": "158:7:9"
+          }
+        ],
+        "canonicalName": "IERC5289Library",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 1146,
+        "linearizedBaseContracts": [
+          1146,
+          904
+        ],
+        "name": "IERC5289Library",
+        "nameLocation": "139:15:9",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 1103,
+              "nodeType": "StructuredDocumentation",
+              "src": "173:47:9",
+              "text": "@notice Emitted when signDocument is called"
+            },
+            "eventSelector": "19e2d5cebbefe3a7ba8a439b6e9d2f1067313d68fb1205c84b1a01b0a7389724",
+            "id": 1109,
+            "name": "DocumentSigned",
+            "nameLocation": "232:14:9",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1108,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1105,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "signer",
+                  "nameLocation": "263:6:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1109,
+                  "src": "247:22:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1104,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "247:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1107,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "documentId",
+                  "nameLocation": "286:10:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1109,
+                  "src": "271:25:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 1106,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "271:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "246:51:9"
+            },
+            "src": "226:72:9"
+          },
+          {
+            "documentation": {
+              "id": 1110,
+              "nodeType": "StructuredDocumentation",
+              "src": "310:160:9",
+              "text": "@notice An immutable link to the legal document (RECOMMENDED to be hosted on IPFS). This MUST use a common file format, such as PDF, HTML, TeX, or Markdown."
+            },
+            "functionSelector": "747f0038",
+            "id": 1117,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "legalDocument",
+            "nameLocation": "485:13:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1113,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1112,
+                  "mutability": "mutable",
+                  "name": "documentId",
+                  "nameLocation": "506:10:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1117,
+                  "src": "499:17:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 1111,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "499:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "498:19:9"
+            },
+            "returnParameters": {
+              "id": 1116,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1115,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1117,
+                  "src": "541:13:9",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1114,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "541:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "540:15:9"
+            },
+            "scope": 1146,
+            "src": "476:80:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1118,
+              "nodeType": "StructuredDocumentation",
+              "src": "568:70:9",
+              "text": "@notice Returns whether or not the given user signed the document."
+            },
+            "functionSelector": "2a418642",
+            "id": 1127,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "documentSigned",
+            "nameLocation": "653:14:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1120,
+                  "mutability": "mutable",
+                  "name": "user",
+                  "nameLocation": "676:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1127,
+                  "src": "668:12:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1119,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "668:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1122,
+                  "mutability": "mutable",
+                  "name": "documentId",
+                  "nameLocation": "689:10:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1127,
+                  "src": "682:17:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 1121,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "682:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "667:33:9"
+            },
+            "returnParameters": {
+              "id": 1126,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1125,
+                  "mutability": "mutable",
+                  "name": "signed",
+                  "nameLocation": "729:6:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1127,
+                  "src": "724:11:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1124,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "724:4:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "723:13:9"
+            },
+            "scope": 1146,
+            "src": "644:93:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1128,
+              "nodeType": "StructuredDocumentation",
+              "src": "745:150:9",
+              "text": "@notice Returns when the the given user signed the document.\n @dev If the user has not signed the document, the timestamp may be anything."
+            },
+            "functionSelector": "dba0f8d2",
+            "id": 1137,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "documentSignedAt",
+            "nameLocation": "910:16:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1133,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1130,
+                  "mutability": "mutable",
+                  "name": "user",
+                  "nameLocation": "935:4:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1137,
+                  "src": "927:12:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1129,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "927:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1132,
+                  "mutability": "mutable",
+                  "name": "documentId",
+                  "nameLocation": "948:10:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1137,
+                  "src": "941:17:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 1131,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "941:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "926:33:9"
+            },
+            "returnParameters": {
+              "id": 1136,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1135,
+                  "mutability": "mutable",
+                  "name": "timestamp",
+                  "nameLocation": "988:9:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1137,
+                  "src": "983:14:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1134,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "983:4:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "982:16:9"
+            },
+            "scope": 1146,
+            "src": "901:98:9",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1138,
+              "nodeType": "StructuredDocumentation",
+              "src": "1007:127:9",
+              "text": "@notice Sign a document\n @dev This MUST be validated by the smart contract. This MUST emit DocumentSigned or throw."
+            },
+            "functionSelector": "8968f997",
+            "id": 1145,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "signDocument",
+            "nameLocation": "1149:12:9",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1140,
+                  "mutability": "mutable",
+                  "name": "signer",
+                  "nameLocation": "1170:6:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1145,
+                  "src": "1162:14:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1139,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1162:7:9",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1142,
+                  "mutability": "mutable",
+                  "name": "documentId",
+                  "nameLocation": "1185:10:9",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1145,
+                  "src": "1178:17:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 1141,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1178:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1161:35:9"
+            },
+            "returnParameters": {
+              "id": 1144,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1205:0:9"
+            },
+            "scope": 1146,
+            "src": "1140:66:9",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1147,
+        "src": "129:1080:9",
+        "usedErrors": []
+      }
+    ],
+    "src": "33:1178:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.18+commit.87f61d96.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.12",
+  "updatedAt": "2023-03-12T18:09:50.519Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "documentSignedAt(address,uint16)": {
+        "details": "If the user has not signed the document, the timestamp may be anything."
+      },
+      "signDocument(address,uint16)": {
+        "details": "This MUST be validated by the smart contract. This MUST emit DocumentSigned or throw."
+      },
+      "supportsInterface(bytes4)": {
+        "details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "DocumentSigned(address,uint16)": {
+        "notice": "Emitted when signDocument is called"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "documentSigned(address,uint16)": {
+        "notice": "Returns whether or not the given user signed the document."
+      },
+      "documentSignedAt(address,uint16)": {
+        "notice": "Returns when the the given user signed the document."
+      },
+      "legalDocument(uint16)": {
+        "notice": "An immutable link to the legal document (RECOMMENDED to be hosted on IPFS). This MUST use a common file format, such as PDF, HTML, TeX, or Markdown."
+      },
+      "signDocument(address,uint16)": {
+        "notice": "Sign a document"
+      }
+    },
+    "version": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "sportract",
+  "version": "1.0.0",
+  "description": "ERC-20 athlete token driven by notarized sport results (ERC-5289), with a Uniswap V1 style market maker funded by sponsors",
+  "license": "SEE LICENSE IN README.md",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --network ganache --reset",
+    "test": "truffle test --network ganache",
+    "simulate": "truffle exec scripts/simulation.js --network ganache"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "4.8.1"
+  }
+}

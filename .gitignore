@@ -1,6 +1,4 @@
-build
-node_modules
-test
-migrations
-package.json
-package-lock.json
+# Dependencies and build output
+node_modules/
+build/
+

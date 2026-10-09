@@ -5,161 +5,140 @@ import "./IERC5289Library.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /**
- * @dev 
+ * @dev Implementation of the ERC-5289 Ethereum Notary Interface
  *
+ * Every document is identified by a 16 bit documentId and stores the signer,
+ * the timestamp of the signature and an immutable reference to the document,
+ * recommended to be hosted on IPFS.
  *
- *
- *
+ * A document can be signed only once, and only by the account sending the
+ * transaction: a notarized record must never be overwritten.
  */
 
 
 contract ERC5289 is IERC5289Library {
 
     /**
-     * @dev 
+     * @dev Data stored for every signed document
      *
-     *
-     *
-     *
+     * timeStamp is the timestamp of the block containing the signature,
+     * and it is zero for a document never signed.
      */
 
 
     struct Document {
 
         address signer;
-        
+
         uint timeStamp;
 
         string ipfsuri;
     }
 
-    mapping (uint16 => Document) private documents; //prev (uint => Document[])
+    // Signed documents, indexed by documentId (up to 65.536 documents)
 
-    mapping (address => uint16) private signers;
+    mapping (uint16 => Document) private documents;
 
-    
+    // Signer of every document, indexed by documentId
+
+    mapping (uint16 => address) private signers;
+
+
     /**
-     * @dev 
-     *
-     *
-     *
+     * @dev The constructor does not need to initialize any state
      *
      */
-    
+
     constructor () {
 
     }
 
-    
+
     /**
-     * @dev
+     * @dev Declares the supported interfaces (ERC-165)
      *
-     *
-     * 
+     * The standard requires to declare both ERC-5289 and ERC-165.
      */
 
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
 
-        return interfaceId == type(IERC5289Library).interfaceId; // || super.supportsInterface(interfaceId);
+        return interfaceId == type(IERC5289Library).interfaceId || interfaceId == type(IERC165).interfaceId;
 
     }
-
-    /**
-     * @dev
-     *
-     *
-     *
-     */
 
     /// @notice An immutable link to the legal document (RECOMMENDED to be hosted on IPFS). This MUST use a common file format, such as PDF, HTML, TeX, or Markdown.
-    
-    function legalDocument(uint16 documentId) public view returns (string calldata) {
-       
-        Document storage d = documents[documentId];
 
-        return d.ipfsuri;
+    function legalDocument(uint16 documentId) public view virtual override returns (string memory) {
 
-        //return documents[documentId].ipfsuri;
-       
-
+        return documents[documentId].ipfsuri;
 
     }
 
-    /**
-     * @dev
-     *
-     *
-     *
-     */
-    
     /// @notice Returns whether or not the given user signed the document.
-    
+    /// @dev The check on timeStamp makes a never signed document result unsigned
+    /// for every address, address(0) included.
+
     function documentSigned(address user, uint16 documentId) public view returns (bool signed) {
-        
-        Document storage d = documents[documentId]; //prev Document[] storage d = ....
 
-        if (d.signer == user) return true;
-        
-        else return false;
-
+        return documents[documentId].timeStamp != 0 && signers[documentId] == user;
     }
 
     /// @notice Returns when the the given user signed the document.
     /// @dev If the user has not signed the document, the timestamp may be anything.
-    
+    /// Here it is zero. The block timestamp (uint256) is converted to the uint64
+    /// required by the interface: 2^64 seconds are hundreds of billions of years.
+
+    function documentSignedAt(address user, uint16 documentId) public view returns (uint64 timestamp) {
+
+        return signers[documentId] == user ? uint64(documents[documentId].timeStamp) : 0;
+
+    }
+
     /**
-     * @dev
+     * @dev Signs a document storing its IPFS reference
      *
-     *
+     * Not part of the standard interface: it is the version used by
+     * Sportract to notarize every contest with the related document.
      */
-     
-    function documentSignedAt(address user, uint16 documentId) public view returns (uint timestamp) {
 
-        //if (documents[documentId].signer == user) return documents[documentId].timeStamp;
-
-
-        Document storage d = documents[documentId];
-
-        if (d.signer == user) return d.timeStamp;
-
-        else return 0;
-
+    function signDocument(address signer, uint16 documentId, string calldata ipfsuri) public virtual {
+        _signDocument(signer, documentId, ipfsuri);
     }
 
-    function signDocument(address signer, uint16 documentId, string calldata ipfsuri) public {
-
-        Document memory d = Document(signer, block.timestamp, ipfsuri);
-
-        documents[documentId] = d;
-
-        signers[signer] = documentId;
-
-        emit DocumentSigned(signer, documentId);
-    }
-    
 
     /// @notice Sign a document
     /// @dev This MUST be validated by the smart contract. This MUST emit DocumentSigned or throw.
 
-    /**
-     * @dev
-     *
-     */
-
-    function signDocument(address signer, uint16 documentId) public {
-
-        Document memory d = Document(signer, block.timestamp,  "https://ipfs.io/ipfs/Qmabcxyz123");
-
-        
-        documents[documentId] = d; //push
-
-        signers[signer] = documentId;
-
-        emit DocumentSigned(signer, documentId);
+    function signDocument(address signer, uint16 documentId) public virtual {
+        _signDocument(signer, documentId, "");
     }
 
-    
-    /// @notice Emitted when signDocument accepts 3 parameters
+    /**
+     * @dev Validates and stores a signature
+     *
+     * Requirements:
+     * - the signer must be the account sending the transaction;
+     * - the document must not be already signed.
+     *
+     * Emits DocumentSigned, as required by the standard, and DocumentSignedAt.
+     */
 
-    event DocumentSignedAt(address indexed signer, uint16 indexed documentId, string uri);*/
+    function _signDocument(address signer, uint16 documentId, string memory ipfsuri) internal virtual {
+
+        require(signer == msg.sender, "ERC5289: signer must be the caller");
+        require(documents[documentId].timeStamp == 0, "ERC5289: document already signed");
+
+        documents[documentId] = Document(signer, block.timestamp, ipfsuri);
+        signers[documentId] = signer;
+
+        emit DocumentSigned(signer, documentId);
+        emit DocumentSignedAt(signer, documentId, ipfsuri);
+
+    }
+
+
+    /// @notice Emitted when signDocument accepts 3 parameters, with the IPFS reference of the document
+
+    event DocumentSignedAt(address indexed signer, uint16 indexed documentId, string uri);
+
 }

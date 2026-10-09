@@ -1,0 +1,344 @@
+{
+  "network": 5777,
+  "date": "2026-10-08T22:04:25.344Z",
+  "contracts": {
+    "Sportract": "0xB5B3085720Cf1d2FeF5901B1C7B0C51982e51059",
+    "SportExchange": "0xc430657C1F4Cae65b42F6BcbA1A2F15C8bb95b86"
+  },
+  "accounts": {
+    "athlete": "0xadC50241c2Fbd4926Dd93F19f113aF109a2e8F82",
+    "sponsorA": "0x86A798CB26d46643c186830D96F6f93C07a1ec6F",
+    "sponsorB": "0x1715A2910DE318D5bF0136C3BeFDB18EdfEaFA6F",
+    "trader": "0xb197dEaC8A0E531C69DAC23829229D3A0CDE9ec4"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "description": "Athlete profile",
+      "tx": "0xaae55c6cf7c5de6604eb5fcca25e9fcf249a94f5f2e372f10b442248d5d833d6",
+      "block": 145,
+      "gas": 117591,
+      "events": [],
+      "state": {
+        "eth_reserve": 0,
+        "sprt_reserve": 0,
+        "price_eth_per_sprt": null,
+        "k": 0,
+        "sprt_supply": 10000,
+        "athlete_sprt_balance": 10000,
+        "lp_shares": {
+          "athlete": 0,
+          "sponsorA": 0,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 2,
+      "description": "Athlete: approve to the exchange (3,000 SPRT)",
+      "tx": "0x8e8c2c7c23877f04936dbbd3492dad4501fc3464a50afdd74a09ae3e980ca7aa",
+      "block": 146,
+      "gas": 46968,
+      "events": [
+        "Approval"
+      ],
+      "state": {
+        "eth_reserve": 0,
+        "sprt_reserve": 0,
+        "price_eth_per_sprt": null,
+        "k": 0,
+        "sprt_supply": 10000,
+        "athlete_sprt_balance": 10000,
+        "lp_shares": {
+          "athlete": 0,
+          "sponsorA": 0,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 3,
+      "description": "Athlete: offer of 2,000 SPRT to sponsor A",
+      "tx": "0x147dca12848b5c230fe3801163ef1f2b4c5bf331e4cfb896ed6acce4fb1f3938",
+      "block": 147,
+      "gas": 51926,
+      "events": [
+        "SponsorshipOffered"
+      ],
+      "state": {
+        "eth_reserve": 0,
+        "sprt_reserve": 0,
+        "price_eth_per_sprt": null,
+        "k": 0,
+        "sprt_supply": 10000,
+        "athlete_sprt_balance": 10000,
+        "lp_shares": {
+          "athlete": 0,
+          "sponsorA": 0,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 4,
+      "description": "Sponsor A: joint deposit with 4 ETH (opening)",
+      "tx": "0x242b7f1a2396184206f8d1c9c3a109a430c9eb8c542c6514fff9cbe3e0e6a759",
+      "block": 148,
+      "gas": 148762,
+      "events": [
+        "Transfer",
+        "Transfer",
+        "Approval",
+        "Transfer",
+        "SponsorLiquidity"
+      ],
+      "state": {
+        "eth_reserve": 4,
+        "sprt_reserve": 2000,
+        "price_eth_per_sprt": 0.002,
+        "k": 8000,
+        "sprt_supply": 10000,
+        "athlete_sprt_balance": 8000,
+        "lp_shares": {
+          "athlete": 2,
+          "sponsorA": 2,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 5,
+      "description": "Contest: score 8 (burn of 10% of the balance)",
+      "tx": "0x27778152c589c4f8adfd909e8bfa782353c8ccf8f42e0c0c1599726fadc96044",
+      "block": 149,
+      "gas": 184423,
+      "events": [
+        "DocumentSigned",
+        "DocumentSignedAt",
+        "Transfer"
+      ],
+      "state": {
+        "eth_reserve": 4,
+        "sprt_reserve": 2000,
+        "price_eth_per_sprt": 0.002,
+        "k": 8000,
+        "sprt_supply": 9200,
+        "athlete_sprt_balance": 7200,
+        "lp_shares": {
+          "athlete": 2,
+          "sponsorA": 2,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 6,
+      "description": "Trader: purchase with 1 ETH",
+      "tx": "0x4d87ccccf84280a857830a7a65998465da8ef0b4ae07626bfd7a18b0023eec5b",
+      "block": 150,
+      "gas": 63742,
+      "events": [
+        "Transfer",
+        "TokenPurchase"
+      ],
+      "state": {
+        "eth_reserve": 5,
+        "sprt_reserve": 1600.9605763458076,
+        "price_eth_per_sprt": 0.003123125,
+        "k": 8004.802881729038,
+        "sprt_supply": 9200,
+        "athlete_sprt_balance": 7200,
+        "lp_shares": {
+          "athlete": 2,
+          "sponsorA": 2,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 7,
+      "description": "Contest: score 2 (mint of 500 SPRT)",
+      "tx": "0xe2a296d2b1b938c0be8ffc02acd0123004379025c5a8b934497c46d33ad705b2",
+      "block": 151,
+      "gas": 166824,
+      "events": [
+        "DocumentSigned",
+        "DocumentSignedAt",
+        "Transfer"
+      ],
+      "state": {
+        "eth_reserve": 5,
+        "sprt_reserve": 1600.9605763458076,
+        "price_eth_per_sprt": 0.003123125,
+        "k": 8004.802881729038,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7700,
+        "lp_shares": {
+          "athlete": 2,
+          "sponsorA": 2,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 8,
+      "description": "Contest: score 5 (supply unchanged)",
+      "tx": "0x1552f07b25a60cf590ef99fb5e9fcac642626eb1f6f0a7830902c13a68933452",
+      "block": 152,
+      "gas": 154115,
+      "events": [
+        "DocumentSigned",
+        "DocumentSignedAt"
+      ],
+      "state": {
+        "eth_reserve": 5,
+        "sprt_reserve": 1600.9605763458076,
+        "price_eth_per_sprt": 0.003123125,
+        "k": 8004.802881729038,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7700,
+        "lp_shares": {
+          "athlete": 2,
+          "sponsorA": 2,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 9,
+      "description": "Athlete: offer of 1,000 SPRT to sponsor B",
+      "tx": "0x7f20961db3aa801fdf3dddb70076031dab6af1b6493f858ea955423bf5ed098f",
+      "block": 153,
+      "gas": 51926,
+      "events": [
+        "SponsorshipOffered"
+      ],
+      "state": {
+        "eth_reserve": 5,
+        "sprt_reserve": 1600.9605763458076,
+        "price_eth_per_sprt": 0.003123125,
+        "k": 8004.802881729038,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7700,
+        "lp_shares": {
+          "athlete": 2,
+          "sponsorA": 2,
+          "sponsorB": 0
+        }
+      }
+    },
+    {
+      "step": 10,
+      "description": "Sponsor B: joint deposit with 1 ETH",
+      "tx": "0x9df5ce5989b1daff80cbc3e694d9ebc24e53b86bb48b87bb7babf2cb82ef397d",
+      "block": 154,
+      "gas": 105139,
+      "events": [
+        "Transfer",
+        "Transfer",
+        "Approval",
+        "Transfer",
+        "SponsorLiquidity"
+      ],
+      "state": {
+        "eth_reserve": 6,
+        "sprt_reserve": 1921.152691614969,
+        "price_eth_per_sprt": 0.003123125,
+        "k": 11526.916149689814,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7379.807884730839,
+        "lp_shares": {
+          "athlete": 2.4,
+          "sponsorA": 2,
+          "sponsorB": 0.4
+        }
+      }
+    },
+    {
+      "step": 11,
+      "description": "Trader: approve to the exchange",
+      "tx": "0x8e4a4200347b4800a7b34920630424de975b37521b8c9691a2e77d793a10acfb",
+      "block": 155,
+      "gas": 46968,
+      "events": [
+        "Approval"
+      ],
+      "state": {
+        "eth_reserve": 6,
+        "sprt_reserve": 1921.152691614969,
+        "price_eth_per_sprt": 0.003123125,
+        "k": 11526.916149689814,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7379.807884730839,
+        "lp_shares": {
+          "athlete": 2.4,
+          "sponsorA": 2,
+          "sponsorB": 0.4
+        }
+      }
+    },
+    {
+      "step": 12,
+      "description": "Trader: sale of 100 SPRT",
+      "tx": "0xc98c1408687db353916e97bc01c19ff2be294e22951662e4f8cda4dcb08f323a",
+      "block": 156,
+      "gas": 57126,
+      "events": [
+        "Approval",
+        "Transfer",
+        "EthPurchase"
+      ],
+      "state": {
+        "eth_reserve": 5.70398634077482,
+        "sprt_reserve": 2021.152691614969,
+        "price_eth_per_sprt": 0.002822145186971076,
+        "k": 11528.627345592045,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7379.807884730839,
+        "lp_shares": {
+          "athlete": 2.4,
+          "sponsorA": 2,
+          "sponsorB": 0.4
+        }
+      }
+    },
+    {
+      "step": 13,
+      "description": "Sponsor A: withdrawal of half of its shares",
+      "tx": "0x101e5dca38fa7a78b211d668890a009addfd1b288cdd7f308f786f8f47b494bc",
+      "block": 157,
+      "gas": 83692,
+      "events": [
+        "Transfer",
+        "Transfer",
+        "RemoveLiquidity"
+      ],
+      "state": {
+        "eth_reserve": 4.515655853113399,
+        "sprt_reserve": 1600.0792141951838,
+        "price_eth_per_sprt": 0.002822145186971076,
+        "k": 7225.40706902557,
+        "sprt_supply": 9700,
+        "athlete_sprt_balance": 7379.807884730839,
+        "lp_shares": {
+          "athlete": 2.4,
+          "sponsorA": 1,
+          "sponsorB": 0.4
+        }
+      }
+    }
+  ],
+  "final_state": {
+    "eth_reserve": 4.515655853113399,
+    "sprt_reserve": 1600.0792141951838,
+    "price_eth_per_sprt": 0.002822145186971076,
+    "k": 7225.40706902557,
+    "sprt_supply": 9700,
+    "athlete_sprt_balance": 7379.807884730839,
+    "lp_shares": {
+      "athlete": 2.4,
+      "sponsorA": 1,
+      "sponsorB": 0.4
+    }
+  }
+}
